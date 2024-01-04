@@ -2,6 +2,11 @@
 
 This is a full-stack payment application developed using the MVC (Model-View-Controller) architecture. It provides a seamless and interactive user experience for money transfers, balance inquiries, transaction history tracking, and exclusive coupon offers.
 
+##Sample User
+- **phone** 9486781245
+- **password** 12345
+- **friend phone number for transaction** 9546782345 , 7856231245
+
 ## Technologies Used
 
 - **Frontend:** React.js
