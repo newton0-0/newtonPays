@@ -14,19 +14,22 @@ export default function UtilityUserFunctions(props) {
     //     setCoupons(couponsData.data);
     // }
     // console.log(coupons);
-    const i=0;
     
     return (
         <div className="utility">
-            <h1 className="checkBalance">Balance : {props.balance}</h1>
-            {coupons.map((coupon) => (
+            <h2 className="checkBalance">Balance : {Math.round((props.balance)*100)/100}</h2>
+        <div className="utilityCoupons">
+            <b style={{color:"white"}}>coupons here</b>
+            {coupons && coupons.map((coupon) => (
                 <div className="coupon">
                     <p className="couponTitle">{coupon.offerId.title}</p>
-                    <p className="couponCashback">{coupon.offerId.description}</p>
-                    <p className="couponValidity">{coupon.offerId.code}</p>
+                    <p className="couponCashback">{coupon.offerId.description.slice(0,30)+ '...'}</p>
+                    <p className="couponValidity">coupon code : <b>{coupon.offerId.code}</b></p>
+                    <p className="couponValidity">expiring on {coupon.validUpto.toString().slice(0,10)}</p>
                 </div>
             )
             )}
+        </div>
         </div>
     )
 }

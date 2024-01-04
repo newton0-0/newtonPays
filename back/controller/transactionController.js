@@ -35,10 +35,15 @@ exports.transaction = async (req, res) => {
         amount: transactionPart.amount,
         description: transactionPart.description
     });
+    
+    if(!transaction.success) {
+        return res.status(404).json(passError(transaction.message, 404));
+    };
 
     const offer = await chechReturnCashback(transactionPart.amount, userId)
-    console.log(offer);
-    res.status(201).json(passData(offer, 201))
+    console.log("offer", offer);
+
+    return res.status(201).json(passData(201))
 };
 
 exports.getTransactions = async (req, res) => {

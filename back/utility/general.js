@@ -92,11 +92,11 @@ function verifyToken(token) {
             return passError('Invalid token', 404);
         }
         const decoded = jwt.decode(token);
-        console.log(decoded);
+        console.log("decoded", decoded);
         return decoded;
     });
-    console.log("user123", isUser.username);
-    return isUser.username;
+    console.log("user123", isUser.user);
+    return isUser.user;
 }
 
 function authUser(req, res, next) {

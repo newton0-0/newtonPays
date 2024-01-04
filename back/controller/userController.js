@@ -8,28 +8,35 @@ const transactionModel = require('../models/transactionModel')
 const {passError, passData, hashData, compareData, randomString, createToken, createVerificationArray, verifyToken} = require('../utility/general')
 
 exports.signup = async (req, res) => {
-    const {username, phone, email, password, pin, balance} = req.body
+    const {username, phone, email, password, pin} = req.body
     
-    if (!username || !email || !password || !pin || !balance || !phone) {
+    if (!username || !email || !password || !pin || !phone) {
         return res.status().json(passError('Please fill all the fields', 404))
     }
+
+    const userExists = await userModel.findOne({$or: [{phone}, {email}]})
+    if(userExists) {
+        return res.status(404).json(passError('User already exists', 404))
+    }
+    const randomDecimal = Math.random();
+    const balance = Math.floor(randomDecimal * (10000 - 100 + 1)) + 100;
     
     const hashedData = await hashData([password, pin])
     const userId = await randomString(6);
-
-    const newUserData = await userModel.create({
-        userId,
-        username,
-        phone,
-        email,
-        password: hashedData[0],
-        pin: hashedData[1],
-        balance
-    })
-
+    
+        const newUserData = await userModel.create({
+            userId,
+            username,
+            phone,
+            email,
+            password: hashedData[0],
+            pin: hashedData[1],
+            balance
+        });
+    
     const authToken = createToken(newUserData.phone)
 
-    res.header('Authorization', authToken).json(passData(201))
+    res.status(201).json(passData(authToken, 201))
     // const newUser = await userModel.create(userData);
 }
 
@@ -49,10 +56,9 @@ exports.login = async (req, res) => {
         return res.status(400).json(passError('Password not matched', 404))
     }
     const userPhone = user.phone
-    console.log("isMatchPhone", userPhone);
     const authToken = createToken(userPhone);
 
-    res.status(200).header({'authorization' : authToken}).json({...passData(200)})
+    res.status(200).json(passData({"authorization": authToken}, 200))
 }
 
 exports.forgotPasswordInitiation = async (req, res) => {

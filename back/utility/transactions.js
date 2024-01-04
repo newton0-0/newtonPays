@@ -11,7 +11,13 @@ const { login } = require('../controller/userController')
 async function doTransaction({senderphn, recieverphn, amount, description, sender_location}) {
     const sender = await userModel.findOne({phone: senderphn}).select('_id balance friends')
     const reciever = await userModel.findOne({phone: recieverphn}).select('_id balance friends')
-    console.log("sender", senderphn, "reciever", reciever);
+    
+    if(!sender || !reciever) {
+        return passError('User not found', 404)
+    }
+    if(sender.balance <= amount) {
+        return passError('Insufficient balance', 404)
+    }
     
     const senderUpdate = await userModel.findByIdAndUpdate(sender._id, 
         { $inc: {balance: -amount}}, 
@@ -24,14 +30,14 @@ async function doTransaction({senderphn, recieverphn, amount, description, sende
          {new : true})
     if(!recieverUpdate) {
         const reUpdate = await userModel.findByIdAndUpdate(sender._id, { $inc: { balance: amount } }, {new : true})
-        return passData(reUpdate, 404)
+        return passData(reUpdate, 404);
     }
 
     const transaction = await transactionModel.create({sender, reciever, amount, description, sender_location});
     if(!transaction) {
         return passError('Something went wrong, no transaction created', 404)
     }
-    return passData(transaction, 201)
+    return passData(transaction, 201);
 }
 
 async function selectCoupon(amount) {

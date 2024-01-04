@@ -53,7 +53,7 @@ const TransactionHistory = () => {
                             <p className='transactionContent'>{transaction.createdAt.slice(0, 10)}</p>
                         </Grid>
                         <Grid item xs={4} md={2} spacing={3}>
-                            <p className='transactionContent'>{transaction.description}</p>
+                            <p className='transactionContent'>{(transaction.description.length >=30)? transaction.description.slice(0, 30) + '...' : transaction.description.slice(0, 30)}</p>
                         </Grid>
                     </Grid>
                 </div>

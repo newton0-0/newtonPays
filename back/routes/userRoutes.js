@@ -23,12 +23,6 @@ router.post('/login', login);
 router.get('/profile', getUserData);
 router.get('/search', authUser, getAllUser);
 
-router.get('/coupons', async (req, res) => {
-    const amount = 40;
-    const coupons = await Offer.find({ minAmount: { $lte: 40 } });
-    res.status(200).json({coupons});
-});
-
 router.get('/forgot-password/initiate', forgotPasswordInitiation);
 router.post('/forgot-password/verify', forgotPasswordVerification);
 router.patch('/forgot-password/reset', authUser, passwordReset);

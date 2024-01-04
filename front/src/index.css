@@ -50,13 +50,14 @@ code {
 .loginPage button{
   align-items: center;
   color: rgb(0, 0, 0);
-  font-weight: 750;
+  font-weight: 800;
   width: auto;
   height: 2rem;
   margin: 1.5rem auto 1rem auto;
   background-color: rgba(0, 0, 0, 0.049);
   border-radius: 0.5rem;
   border: 2px solid white;
+  text-shadow: 0px 0px 5px rgb(255, 255, 255) ;
 }
 
 .loginPage form{
@@ -81,10 +82,12 @@ code {
 }
 
 .transactionsList{
+  height: 40rem;
+  overflow-y: auto;
   color: rgb(255, 255, 255);
   padding: 0.5rem 0rem 0.5rem 0rem;
   margin: auto;
-  justify-items: center;
+  justify-items: right;
 }
 
 .transactionHeader{
@@ -112,6 +115,7 @@ code {
 }
 
 .transactionForm{
+  height: 13rem;
   background-color: rgba(0, 0, 0, 0.304);
   border-radius: 1.5rem;
   color: white;
@@ -139,7 +143,7 @@ code {
 .transactionForm button{
   width: 60%;
   margin: 0rem 20% 0rem 20%;
-  border-radius: 0.5rem 0.5rem 0px 0px;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .transactionHistoryTab{
@@ -168,4 +172,41 @@ code {
   border-radius: 1rem;
   padding: 0.5rem;
   margin: 0.5rem;
+}
+
+.utilityCoupons{
+  height: 17rem;
+  overflow-y: scroll;
+}
+
+.coupon{
+  background-color: rgba(0, 0, 0, 0.252);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 2rem;
+}
+
+.navbarBlock{
+  text-align: center;
+  text-shadow: 0px 0px 15px rgb(255, 255, 255);
+}
+
+.logout button{
+  text-align: center;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.153);
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgb(255, 255, 255);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 5px;
+  margin-top: 0.5rem;
+}
+
+.switch{
+  width: 100%;
+  background-color: rgba(232, 232, 232, 0.421);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
 }

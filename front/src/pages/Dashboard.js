@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 
 export default function Dashboard() {
   const id = localStorage.getItem('username');
-
+  console.log(id);
   const [userData, setUser] = useState([]);
   const [userCoupons, setCoupons] = useState([]);
   const [userTransactions, setTransactions] = useState([]);
@@ -34,7 +34,10 @@ export default function Dashboard() {
         <Grid container direction="row">
             <Grid className='navbarBlock' xs={2}><b>Welcome</b></Grid>
             <Grid className='navbarBlock' xs={7}><h3><b>Newton Pay</b></h3></Grid>
-            <Grid className='navbarBlock' xs={3}>LogOut</Grid>
+            <Grid className='logout' xs={3}><button onClick={() => {
+              localStorage.removeItem('username');
+              window.location.assign('/');
+            }}>Logout</button></Grid>
         </Grid>
     <Grid container direction="row" style={{ height: '100vh' }}>
       {/* First component - takes half of the screen and is not scrollable */}
